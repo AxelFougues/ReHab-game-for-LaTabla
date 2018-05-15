@@ -71,7 +71,6 @@ public:
     
     enum States{initial, arrival, naturalistInput, harvestersInput, harvest, results};
     int round = 0, accessCount = 0;
-    list<vec2> playerTokens;
     States state = initial;
     float gridWidth, gridHeight;
     RehabGame board;
@@ -79,7 +78,8 @@ public:
     void computeGrid();
     void drawFillGrid(ColorA c, bool birds, bool access);
     void naturalistClick(vec2 loc);
-
+    vec2 coordsToGrid(vec2 coords);
+    void registerHarvesterTokens(List<Contour> tokens);
     
     //Universal
     void initialize();

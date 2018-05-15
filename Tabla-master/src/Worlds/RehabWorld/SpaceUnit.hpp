@@ -24,6 +24,7 @@ public:
     int getSpaceUnitPosition();
     void nidificate();
     bool isSettled(){return animal.settled;}
+    void addHarvesterToken(){harvesterTokens++;}
     
 private:
     
@@ -31,6 +32,7 @@ private:
     int posX, posY;
     Plant plant;
     Animal animal;
+    harvesterTokens = 0;
     
 };
 

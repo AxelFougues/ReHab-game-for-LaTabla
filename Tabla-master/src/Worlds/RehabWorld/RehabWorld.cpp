@@ -36,12 +36,12 @@ void RehabWorld::update(){ //Called each frame
             break;
             
         case naturalistInput:
-            playerTokens.clear();
             break;
             
         case harvestersInput:
             reconCubeInputs();
-            if(playerTokens.size() == 3)
+            if(cubeInputs.size() == 3)
+                
                 state = harvest;
             break;
             
@@ -64,15 +64,15 @@ void RehabWorld::prepareToDraw(){ //Called before each draw call
 void RehabWorld::draw( DrawType drawType ){//Called many times per frame
     switch(state){
         case naturalistInput:
-            drawFillGrid(Colorf(0.0, 0.2, 0.0), true, true);
+            drawFillGrid(ColorA(0.0, 0.2, 0.0), true, true);
             drawGrid(Colorf(0, 1.0, 1.0));
             break;
             
         case harvestersInput:
             
-            drawFillGrid(ColorA(0.0, 0.2, 0.0, 0.0), false, true);
-            drawGrid(Colorf(0, 1.0, 1.0));
-            drawCubeInputs(ColorA(1,1,1));
+            drawFillGrid(ColorA(0.0, 0.2, 0.0, 0.5), false, true);
+            //drawGrid(Colorf(0, 1.0, 1.0));
+            drawCubeInputs(ColorA(1,1,0));
             
             break;
             
@@ -90,11 +90,12 @@ void RehabWorld::draw( DrawType drawType ){//Called many times per frame
 
 void RehabWorld::drawGrid(ColorA c){
     drawWorldBounds(c);
-    for (int i = gridWidth; i < RehabGame::boardWidth; i += gridWidth) {
-        gl::drawLine(vec2(i, upperLeft.y), vec2(i, lowerLeft.y));
+    gl::color(c);
+    for (int i = 1; i < RehabGame::boardWidth; i++) {
+        gl::drawLine(vec2(i*gridWidth, upperLeft.y), vec2(i*gridWidth, lowerLeft.y));
     }
-    for (int i = gridHeight; i < RehabGame::boardHeight; i += gridHeight) {
-        gl::drawLine(vec2(upperLeft.x, i), vec2(upperRight.x, i));
+    for (int i = 1; i < RehabGame::boardHeight; i++) {
+        gl::drawLine(vec2(upperLeft.x, i*gridHeight), vec2(upperRight.x, i*gridHeight));
     }
 }
 
@@ -113,11 +114,22 @@ void RehabWorld::drawFillGrid(ColorA c, bool birds, bool access){
             }
             //ACCCESS DISPLAY
             if(access && !board.board[x][y].getAccess()){
-                gl::color(0.5, 0.1, 0.1);
+                gl::color(0.5, 0.1, 0.1, c.a);
                 gl::drawSolidRoundedRect(rect, 3);
             }
         }
     }
+}
+
+void RehabWorld::registerHarvesterTokens(list<Contour> tokens){
+    for(Contour c : tokens){
+        vec2 gLoc = coordsToGrid(c.mCenter);
+        board.board[(int)gLoc.x][(int)gLoc.y].addHarvesterToken();
+    }
+}
+
+vec2 RehabWorld::coordsToGrid(vec2 coords){
+    return vec2(int(coords.x/gridWidth),int(coords.y/gridHeight));
 }
 
 void RehabWorld::computeGrid(){
@@ -126,9 +138,9 @@ void RehabWorld::computeGrid(){
 }
 
 void RehabWorld::naturalistClick(vec2 loc){
-    int x = int(loc.x/gridWidth), y = int(loc.y/gridHeight);
-    if(!(board.board[x][y].getAccess() && accessCount == 3)){
-        if(board.board[x][y].changeAccess())
+    loc  = coordsToGrid(loc);
+    if(!(board.board[loc.x][loc.y].getAccess() && accessCount == 3)){
+        if(board.board[loc.x][loc.y].changeAccess())
             accessCount--;
         else
             accessCount++;
