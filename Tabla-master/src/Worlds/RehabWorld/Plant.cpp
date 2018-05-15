@@ -7,13 +7,6 @@
 
 #include "Plant.hpp"
 
-
-Plant::Plant(SpaceUnit *su){
-    noHarvestPeriod = 0;
-    biomass = rand() % maxBiomass + 1;
-    habitat = su;
-}
-
 void Plant::decreaseBiomassBy(int x){
     if(biomass >= minBiomass + x)
         biomass -= x;

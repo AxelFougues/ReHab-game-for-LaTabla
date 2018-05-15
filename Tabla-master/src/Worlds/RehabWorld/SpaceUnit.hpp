@@ -9,34 +9,28 @@
 #define SpaceUnit_hpp
 
 #include <stdio.h>
-#include "RehabGame.h"
 #include "Plant.hpp"
 #include "Animal.hpp"
 
-class Plant;
-class Animal;
 
 class SpaceUnit{
     
 public:
-    SpaceUnit(){}
     
-    SpaceUnit(int x, int y, RehabGame* game);
-
-    int getBiomass(){return biomass;}
+    void setPos(int x, int y){posX = x; posY = y;}
+    int getBiomass(){return plant.getBiomass();}
     bool getAccess(){return access;}
-    int getHarvestedNeighbors();
+    bool changeAccess(){access = !access; return access;}
     int getSpaceUnitPosition();
-    
+    void nidificate();
+    bool isSettled(){return animal.settled;}
     
 private:
     
-    int biomass;
-    bool access;
+    bool access = true;
     int posX, posY;
-    RehabGame* game;
-    Plant* plant;
-    Animal* animal;
+    Plant plant;
+    Animal animal;
     
 };
 

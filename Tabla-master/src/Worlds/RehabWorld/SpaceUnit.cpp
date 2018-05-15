@@ -7,14 +7,10 @@
 
 #include "SpaceUnit.hpp"
 
-SpaceUnit::SpaceUnit(int x, int y, RehabGame* game){
-    biomass = 2;
+/*SpaceUnit::SpaceUnit(int x, int y){
     posX = x;
     posY = y;
     access = true;
-    game = game;
-    plant = new Plant(this);
-    animal = new Animal(this);
 }
 
 int SpaceUnit::getSpaceUnitPosition(){
@@ -23,7 +19,8 @@ int SpaceUnit::getSpaceUnitPosition(){
     if( posY == 0 || posY == RehabGame::boardHeight ) i++;
     return i;
 }
+*/
 
-int SpaceUnit::getHarvestedNeighbors(){
-    
+void SpaceUnit::nidificate(){
+    animal.settle(plant.getBiomass());
 }

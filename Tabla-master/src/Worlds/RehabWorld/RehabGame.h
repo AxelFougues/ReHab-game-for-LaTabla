@@ -9,7 +9,6 @@
 #define RehabGame_h
 
 #include "SpaceUnit.hpp"
-class SpaceUnit;
 
 class RehabGame{
     
@@ -17,10 +16,10 @@ public:
     
     static const int boardWidth = 5;
     static const int boardHeight = 4;
+    void fillBoard();
+    void nidificate();
     
-private:
-    
-    SpaceUnit *board[RehabGame::boardWidth][RehabGame::boardHeight];
+    SpaceUnit board[RehabGame::boardWidth][RehabGame::boardHeight];
     
 };
 

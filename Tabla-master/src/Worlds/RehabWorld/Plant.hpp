@@ -10,14 +10,15 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "SpaceUnit.hpp"
+
 
 class Plant{
   
 public:
     
-    Plant();
-    Plant(SpaceUnit *su);
+    Plant(){
+        biomass = rand() % (maxBiomass + 1);
+    }
     
     int getBiomass(){return biomass;}
     void renewBiomass(int harvesters);
@@ -27,8 +28,7 @@ private:
     const int maxBiomass = 3;
     const int minBiomass = 0;
     int biomass;
-    int noHarvestPeriod;
-    SpaceUnit *habitat;
+    int noHarvestPeriod = 0;
     
     void updateNoHarvestPeriod(bool harvested);
     void decreaseBiomassBy(int x);

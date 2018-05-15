@@ -7,40 +7,41 @@
 
 #include "Animal.hpp"
 
-Animal::Animal(SpaceUnit *su){
-    habitat = su;
-}
-
-int Animal::reproduce(){
+void Animal::reproduce(int n, int pos){
     if(settled){
-        int n = habitat->getHarvestedNeighbors();
-        int pos = habitat->getSpaceUnitPosition();
+        kids = 0;
         switch (pos) {
             case 0:
                 if(n <= 1)
-                    return 2;
+                    kids = 2;
                 if(n <= 4)
-                    return 1;
+                    kids = 1;
                 break;
             case 1:
                 if(n == 0)
-                    return 2;
+                    kids = 2;
                 if(n <= 2)
-                    return 1;
+                    kids = 1;
                 break;
             case 2:
                 if(n == 0)
-                    return 2;
+                    kids = 2;
                 if(n == 1)
-                    return 1;
+                    kids = 1;
                 break;
         }
     }
-    return 0;
 }
 
-void Animal::settle(){
-    if(!settled && habitat->getBiomass() >= habitatSuitabilityThreshold){
+void Animal::settle(int b){
+    if(!settled && b >= habitatSuitabilityThreshold){
         settled = true;
     }
 }
+
+void Animal::unSettle(){
+    settled = false;
+    
+}
+
+

@@ -9,25 +9,21 @@
 #define Animal_hpp
 
 #include <stdio.h>
-#include "SpaceUnit.hpp"
 
 class Animal{
     
 public:
     
-    Animal();
-    Animal(SpaceUnit *su);
+    bool settled = false;
+    int kids = 0;
+    void reproduce(int h, int pos);
+    void settle(int b);
+    void unSettle();
     
-    
-    bool settled;
-    int reproduce();
-    void settle();
     
 private:
     
     const int habitatSuitabilityThreshold = 2;
-    float reproductionProbability;
-    bool testReproduction;
-    SpaceUnit *habitat;
+    
 };
 #endif /* Animal_hpp */

@@ -2,6 +2,7 @@
 
 #ifdef isUsingContours
 
+
 PolyLine2 RehabWorld::getContainerContour(vec2 point){
     const Contour* in = mContours.findLeafContourContainingPoint(point ,mContourFilter) ;
     if (in){
@@ -27,13 +28,21 @@ void RehabWorld::drawContainerContour(vec2 point, Color color){
     gl::draw(getContainerContour(point));
 }
 
-list<vec2> RehabWorld::getPointsFromInput(){
-    list<vec2> squares;
+void RehabWorld::reconCubeInputs(){
+    cubeInputs.clear();
     for(Contour c : mContours){
-        if(c.mIsLeaf && c.mPolyLine.getPoints().size()==4){
-            squares.push_back(c.mCenter);
+        if(c.mIsLeaf && c.mPolyLine.getPoints().size()==4 && c.mArea < MAX_AREA_THRESHOLD){
+            cubeInputs.push_back(c);
         }
     }
-    return squares;
+}
+
+void RehabWorld::drawCubeInputs(Color color){
+    gl::color(color);
+    for(Contour c : cubeInputs){
+        if(c.mPolyLine.size()<CONTOUR_THRESHOLD)
+            gl::draw(c.mPolyLine);
+        //gl::drawSolidRect(Rectf(c.mPolyLine.getPoints()));
+    }
 }
 #endif
