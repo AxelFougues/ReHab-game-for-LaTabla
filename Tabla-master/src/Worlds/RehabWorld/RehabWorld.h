@@ -12,6 +12,7 @@
 #include "GameWorld.h"
 #include "RehabGame.h"
 
+
 /*###FEATURES###*/
 //Uncomment the features you wish to use.
 #define isVisible
@@ -139,9 +140,13 @@ public:
 #endif
     
 #ifdef isUsingVision
+    Pipeline::StageRef sourceImage;
     ContourVector mContours;
     ContourVector::Filter mContourFilter;
-    void updateVision( const Vision::Output& c, Pipeline& ) override { setContours(c.mContours); }
+    void updateVision( const Vision::Output& c, Pipeline& pipeline) override{
+        setContours(c.mContours);
+        sourceImage = pipeline.getStage("clipped");
+    }
     void setContours( const ContourVec& contours, ContourVec::Filter filter=0 ) { mContours = contours; mContourFilter=filter; }
 #endif
     
@@ -244,6 +249,13 @@ private:
      * @param color Color used for drawing.
      */
     void drawCubeInputs(Color color);
+    
+    /*!
+     * @discussion If contours activated, gets mean color of pixels contained by given contour.
+     * @param c contour to be used.
+     * @return The mean color.
+     */
+    ColorA getMeanContourColor(Contour c);
 #endif
     
 #ifdef isUsingGestures

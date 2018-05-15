@@ -37,6 +37,29 @@ void RehabWorld::reconCubeInputs(){
     }
 }
 
+ColorA RehabWorld::getMeanContourColor(Contour c){
+    Mat1b img = sourceImage->mImageCV.getMat(ACCESS_RW);
+    rectangle(img, cv::Rect(0,0,100,100), Scalar(100), CV_FILLED);
+    //Rectangle definition
+    cv::Point pts[1][4];
+    pts[0][0] = cv::Point(c.mPolyLine.getPoints()[0].x,c.mPolyLine.getPoints()[0].y);
+    pts[0][1] = cv::Point(c.mPolyLine.getPoints()[0].x,c.mPolyLine.getPoints()[1].y);
+    pts[0][2] = cv::Point(c.mPolyLine.getPoints()[0].x,c.mPolyLine.getPoints()[2].y);
+    pts[0][3] = cv::Point(c.mPolyLine.getPoints()[0].x,c.mPolyLine.getPoints()[3].y);
+    
+    const cv::Point* points [1] = {pts[0]};
+    int npoints = 4;
+    
+    //Mask creation
+    Mat1b mask(img.rows, img.cols, uchar(0));
+    fillPoly(mask, points, &npoints, 1, Scalar(255));
+    
+    //Mean color of crop
+    Scalar average = mean(img, mask);
+    
+    return ColorA(average.val[0], average.val[1], average.val[2]);
+}
+
 void RehabWorld::drawCubeInputs(Color color){
     gl::color(color);
     for(Contour c : cubeInputs){

@@ -18,7 +18,6 @@ static GameCartridgeSimple sCartridge(nameOfWorld, [](){
 
 
 void RehabWorld::initialize(){ //Called at world creation
-    srand(time(NULL));
 }
 
 void RehabWorld::update(){ //Called each frame
@@ -59,7 +58,7 @@ void RehabWorld::update(){ //Called each frame
 }
 
 void RehabWorld::prepareToDraw(){ //Called before each draw call
-    
+    glEnable(GL_BLEND);
 }
 
 void RehabWorld::draw( DrawType drawType ){//Called many times per frame
@@ -70,8 +69,10 @@ void RehabWorld::draw( DrawType drawType ){//Called many times per frame
             break;
             
         case harvestersInput:
-            drawFillGrid(Colorf(0.0, 0.2, 0.0), false, true);
+            
+            drawFillGrid(ColorA(0.0, 0.2, 0.0, 0.0), false, true);
             drawGrid(Colorf(0, 1.0, 1.0));
+            drawCubeInputs(ColorA(1,1,1));
             
             break;
             
@@ -84,6 +85,8 @@ void RehabWorld::draw( DrawType drawType ){//Called many times per frame
             break;
     }
 }
+
+
 
 void RehabWorld::drawGrid(ColorA c){
     drawWorldBounds(c);
@@ -100,7 +103,7 @@ void RehabWorld::drawFillGrid(ColorA c, bool birds, bool access){
         for (int x = 0; x < RehabGame::boardWidth; x++) {
             int bio = board.board[x][y].getBiomass();
             Rectf rect = Rectf(x * gridWidth, y * gridHeight, (x+1) * gridWidth, (y+1) * gridHeight);
-            gl::color(c.r * bio, c.g * bio, c.b * bio);
+            gl::color(c.r * bio, c.g * bio, c.b * bio, c.a);
             //BIOMASS DISPLAY
             gl::drawSolidRect(rect);
             //BIRD DISPLAY
@@ -198,7 +201,6 @@ void RehabWorld::naturalistClick(vec2 loc){
 		gl::drawSolidCircle( getMousePosInWorld(), size);
 	}
 #endif
-
 
 
 
