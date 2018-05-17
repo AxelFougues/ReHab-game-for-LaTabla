@@ -63,9 +63,11 @@ ColorA RehabWorld::getMeanContourColor(Contour c){
 void RehabWorld::drawCubeInputs(Color color){
     gl::color(color);
     for(Contour c : cubeInputs){
-        if(c.mPolyLine.size()<CONTOUR_THRESHOLD)
+        if(c.mPolyLine.size()<CONTOUR_THRESHOLD){
             gl::draw(c.mPolyLine);
-        //gl::drawSolidRect(Rectf(c.mPolyLine.getPoints()));
+            //gl::color(color.r, color.g, color.b, 0.4);
+            //gl::drawSolidRect(Rectf(c.mPolyLine.getPoints()));
+        }
     }
 }
 #endif

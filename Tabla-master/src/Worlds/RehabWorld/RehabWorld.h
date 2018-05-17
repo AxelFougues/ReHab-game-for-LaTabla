@@ -74,12 +74,13 @@ public:
     States state = initial;
     float gridWidth, gridHeight;
     RehabGame board;
+    bool keyboardValidation = false;
     void drawGrid(ColorA c);
     void computeGrid();
     void drawFillGrid(ColorA c, bool birds, bool access);
     void naturalistClick(vec2 loc);
     vec2 coordsToGrid(vec2 coords);
-    void registerHarvesterTokens(List<Contour> tokens);
+    void registerHarvesterTokens(list<Contour> tokens);
     
     //Universal
     void initialize();

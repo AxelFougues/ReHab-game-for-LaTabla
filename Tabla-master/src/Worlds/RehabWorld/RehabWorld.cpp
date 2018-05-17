@@ -36,23 +36,30 @@ void RehabWorld::update(){ //Called each frame
             break;
             
         case naturalistInput:
+            if(keyboardValidation){
+                keyboardValidation = false;
+                state = harvestersInput;
+            }
             break;
             
         case harvestersInput:
             reconCubeInputs();
-            if(cubeInputs.size() == 3)
-                
+            if(cubeInputs.size() == 3 && keyboardValidation){
+                registerHarvesterTokens(cubeInputs);
                 state = harvest;
+            }
+            keyboardValidation = false;
             break;
             
         case harvest:
-            
-            //state = results;
+            board.harvest();
+            state = results;
             break;
             
         case results:
-            
-            //state = arrival;
+            if(keyboardValidation)
+                state = arrival;
+            keyboardValidation = false;
             break;
     }
 }
@@ -71,17 +78,16 @@ void RehabWorld::draw( DrawType drawType ){//Called many times per frame
         case harvestersInput:
             
             drawFillGrid(ColorA(0.0, 0.2, 0.0, 0.5), false, true);
-            //drawGrid(Colorf(0, 1.0, 1.0));
-            drawCubeInputs(ColorA(1,1,0));
-            
+            drawGrid(ColorA(0, 1.0, 1.0, 0.5));
+            if(cubeInputs.size() == 3)
+                drawCubeInputs(ColorA(0, 1, 0));
+            else
+                drawCubeInputs(ColorA(1, 0, 0));
             break;
-            
-        case harvest:
-            
-            break;
-            
+
         case results:
-            
+            drawFillGrid(ColorA(0.0, 0.2, 0.0), true, false);
+            drawGrid(Colorf(0, 1.0, 1.0));
             break;
     }
 }
@@ -105,12 +111,21 @@ void RehabWorld::drawFillGrid(ColorA c, bool birds, bool access){
             int bio = board.board[x][y].getBiomass();
             Rectf rect = Rectf(x * gridWidth, y * gridHeight, (x+1) * gridWidth, (y+1) * gridHeight);
             gl::color(c.r * bio, c.g * bio, c.b * bio, c.a);
+            
             //BIOMASS DISPLAY
             gl::drawSolidRect(rect);
+            //gl::color(1,1,1);
+            //gl::drawString(to_string(board.board[x][y].getPopulation()), vec2(x * gridWidth +  2, y * gridHeight + 2));
+            
             //BIRD DISPLAY
-            if(birds && board.board[x][y].isSettled()){
+            if(birds){
                 gl::color(1, 1, 1);
-                gl::drawSolidCircle(vec2(x * gridWidth + 2, y * gridHeight + 2), 1);
+                float birdSize = 4;
+                for (int i = 0; i < board.board[x][y].getPopulation(); i++) {
+                    float xb = gridWidth * (x + 0.5) - (birdSize * ((float)board.board[x][y].getPopulation()/2) - birdSize / 2 ) + i * birdSize;
+                    float yb = gridHeight * (y + 0.5);
+                    gl::drawSolidCircle(vec2(xb, yb), birdSize / 3);
+                }
             }
             //ACCCESS DISPLAY
             if(access && !board.board[x][y].getAccess()){
@@ -139,8 +154,8 @@ void RehabWorld::computeGrid(){
 
 void RehabWorld::naturalistClick(vec2 loc){
     loc  = coordsToGrid(loc);
-    if(!(board.board[loc.x][loc.y].getAccess() && accessCount == 3)){
-        if(board.board[loc.x][loc.y].changeAccess())
+    if(!(board.board[(int)loc.x][(int)loc.y].getAccess() && accessCount == 3)){
+        if(board.board[(int)loc.x][(int)loc.y].changeAccess())
             accessCount--;
         else
             accessCount++;
@@ -176,8 +191,7 @@ void RehabWorld::naturalistClick(vec2 loc){
         cout << "Rehab keyboard key up used." << endl;
         switch ( event.getCode() ){
             case KeyEvent::KEY_RETURN:
-                if(state == naturalistInput)
-                    state = harvestersInput;
+                keyboardValidation = true;
                 break ;
         }
     }

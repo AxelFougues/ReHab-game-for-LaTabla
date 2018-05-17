@@ -18,7 +18,8 @@ public:
     static const int boardHeight = 4;
     void fillBoard();
     void nidificate();
-    
+    void harvest();
+    int neighborHarvesters(cinder::vec2 pos);
     SpaceUnit board[RehabGame::boardWidth][RehabGame::boardHeight];
     
 };

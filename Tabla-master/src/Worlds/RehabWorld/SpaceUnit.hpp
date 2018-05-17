@@ -25,6 +25,9 @@ public:
     void nidificate();
     bool isSettled(){return animal.settled;}
     void addHarvesterToken(){harvesterTokens++;}
+    void harvest(int pos, int harv);
+    int getHarvesterTokens(){return harvesterTokens;}
+    int getPopulation(){if(!animal.settled) return 0; return animal.kids+1;}
     
 private:
     
@@ -32,7 +35,7 @@ private:
     int posX, posY;
     Plant plant;
     Animal animal;
-    harvesterTokens = 0;
+    int harvesterTokens = 0;
     
 };
 

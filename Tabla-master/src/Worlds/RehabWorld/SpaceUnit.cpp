@@ -7,20 +7,15 @@
 
 #include "SpaceUnit.hpp"
 
-/*SpaceUnit::SpaceUnit(int x, int y){
-    posX = x;
-    posY = y;
-    access = true;
-}
-
-int SpaceUnit::getSpaceUnitPosition(){
-    int i = 0;
-    if( posX == 0 || posX == RehabGame::boardWidth ) i++;
-    if( posY == 0 || posY == RehabGame::boardHeight ) i++;
-    return i;
-}
-*/
 
 void SpaceUnit::nidificate(){
     animal.settle(plant.getBiomass());
+}
+
+void SpaceUnit::harvest(int pos, int harv){
+    if(harvesterTokens == 0){
+        animal.reproduce(pos, harv);
+    }else{
+        plant.renewBiomass(harvesterTokens);
+    }
 }

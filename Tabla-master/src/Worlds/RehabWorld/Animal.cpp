@@ -7,26 +7,26 @@
 
 #include "Animal.hpp"
 
-void Animal::reproduce(int n, int pos){
+void Animal::reproduce(int pos, int harvesters){
     if(settled){
         kids = 0;
         switch (pos) {
             case 0:
-                if(n <= 1)
+                if(harvesters <= 1)
                     kids = 2;
-                if(n <= 4)
+                if(harvesters <= 4)
                     kids = 1;
                 break;
             case 1:
-                if(n == 0)
+                if(harvesters == 0)
                     kids = 2;
-                if(n <= 2)
+                if(harvesters <= 2)
                     kids = 1;
                 break;
             case 2:
-                if(n == 0)
+                if(harvesters == 0)
                     kids = 2;
-                if(n == 1)
+                if(harvesters == 1)
                     kids = 1;
                 break;
         }
