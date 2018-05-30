@@ -1,0 +1,125 @@
+<RaceWorld>
+	<!-- cm -->
+	<BallDefaultRadius>			2 </BallDefaultRadius>
+	<BallDefaultMaxRadius>		2 </BallDefaultMaxRadius>
+	<BallMaxVel>				.5 </BallMaxVel>
+	<BallContourImpactNormalVelImpulse>.0</BallContourImpactNormalVelImpulse>
+	<BallDefaultColor>			00FFFF </BallDefaultColor>
+	<BallDefaultRibbonColor>			CCFFFF </BallDefaultRibbonColor>
+	
+	<Ribbon>
+		<Enabled>1</Enabled>
+		<MaxLength>50</MaxLength>
+		<SampleRate>1</SampleRate>
+		<RadiusScale>.9</RadiusScale>
+		<RadiusExp>.5</RadiusExp>
+		<AlphaScale>.5</AlphaScale>
+		<AlphaExp>.5</AlphaExp>
+	</Ribbon>
+	
+	<!-- cm -->
+	<Vision>
+		<Contours>
+			<ContourMinRadius>			.5	</ContourMinRadius>
+			<ContourMinArea>			.5	</ContourMinArea>
+			<ContourDPEpsilon>			.5	</ContourDPEpsilon>
+			<ContourMinWidth>			.25	</ContourMinWidth>
+		</Contours>
+	</Vision>
+
+	<Tuning>
+		
+		<ShipDrawDebug>0</ShipDrawDebug>
+		<AxisDeadZone>.2</AxisDeadZone>
+		
+		<GoalBall>
+			<SpawnWaitTicks>180</SpawnWaitTicks>
+			<Color>F5BF30</Color>
+			<Radius>1.5</Radius>
+			<SpawnMaxVel>.1</SpawnMaxVel>
+		</GoalBall>
+
+		<Shot>
+			<Radius>.5</Radius>
+			<Vel>.5</Vel>
+			<Distance>1</Distance>
+		</Shot>
+		
+		<MultigoalOdds>8</MultigoalOdds>
+		<MultigoalMax>4</MultigoalMax>
+		
+		<AttractAnimLength>1.</AttractAnimLength>
+		
+		<PlayerRadius>2</PlayerRadius>
+		<PlayerTurnSpeedScale>.1</PlayerTurnSpeedScale>
+		<PlayerAccelSpeedScale>.05</PlayerAccelSpeedScale>
+		<PlayerFriction>.005</PlayerFriction>
+		<PlayerCollideFrictionCoeff>.1</PlayerCollideFrictionCoeff>
+		<PlayerFireIntervalTicks>30</PlayerFireIntervalTicks>
+		<PlayerRespawnWaitTicks>120</PlayerRespawnWaitTicks>
+		<PlayerDieSpawnGoalToScoreFrac>.5</PlayerDieSpawnGoalToScoreFrac>
+		<PlayerScoreNotchRadius>.5</PlayerScoreNotchRadius>
+		
+		<Pfx>
+			<FadeStep>.05</FadeStep>
+			<CollideDustColor>FFFFFF</CollideDustColor>
+			<CollideDustRadius>.5</CollideDustRadius>
+		</Pfx>
+		
+	</Tuning>
+
+	<PlayerColors>
+		<p>
+			<Ship>D66EC3</Ship>
+			<ShipRibbon>FFCCDD</ShipRibbon>
+			<Shot>FF00ED</Shot>
+			<ShotRibbon>FFE700</ShotRibbon>
+		</p>
+		<p>
+			<Ship>27BCDB</Ship>
+			<ShipRibbon>CCFFFF</ShipRibbon>
+			<Shot>0049FF</Shot>
+			<ShotRibbon>F8FF00</ShotRibbon>
+		</p>
+		<p>
+			<Ship>27DB4E</Ship>
+			<ShipRibbon>CCFFCD</ShipRibbon>
+			<Shot>0CB310</Shot>
+			<ShotRibbon>B9FF00</ShotRibbon>
+		</p>
+		<p>
+			<Ship>DB4027</Ship>
+			<ShipRibbon>FFAEAE</ShipRibbon>
+			<Shot>B30C6F</Shot>
+			<ShotRibbon>FFCBEF</ShotRibbon>
+		</p>
+
+<!-- repeats for now -->
+		<p>
+			<Ship>D66	EC3</Ship>
+			<ShipRibbon>FFCCDD</ShipRibbon>
+			<Shot>FF00ED</Shot>
+			<ShotRibbon>FFE700</ShotRibbon>
+		</p>
+		<p>
+			<Ship>27BCDB</Ship>
+			<ShipRibbon>CCFFFF</ShipRibbon>
+			<Shot>0049FF</Shot>
+			<ShotRibbon>F8FF00</ShotRibbon>
+		</p>
+		<p>
+			<Ship>27DB4E</Ship>
+			<ShipRibbon>CCFFCD</ShipRibbon>
+			<Shot>0CB310</Shot>
+			<ShotRibbon>B9FF00</ShotRibbon>
+		</p>
+		<p>
+			<Ship>DB4027</Ship>
+			<ShipRibbon>FFAEAE</ShipRibbon>
+			<Shot>B30C6F</Shot>
+			<ShotRibbon>FFCBEF</ShotRibbon>
+		</p>
+	</PlayerColors>
+		
+	
+</RaceWorld>

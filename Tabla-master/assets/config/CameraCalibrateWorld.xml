@@ -1,0 +1,24 @@
+<CameraCalibrateWorld>
+
+	<BoardCols>8</BoardCols>
+	<BoardRows>8</BoardRows>
+	
+	<DrawBoard>0</DrawBoard>
+	<NumBoardsToSolve>12</NumBoardsToSolve>
+	<UniqueBoardDiffThresh>5</UniqueBoardDiffThresh>
+	<MinSecsBetweenCameraSamples>.5</MinSecsBetweenCameraSamples>
+	<Verbose>1</Verbose>
+	
+	<!-- cm -->
+	<Vision>
+		<CaptureAllPipelineStages>1</CaptureAllPipelineStages> <!-- So we can extract bitmaps -->
+
+		<Contours>
+			<ContourMinRadius>			1	</ContourMinRadius>
+			<ContourMinArea>			1	</ContourMinArea>
+			<ContourDPEpsilon>			1	</ContourDPEpsilon>
+			<ContourMinWidth>			2	</ContourMinWidth>
+		</Contours>
+	</Vision>
+
+</CameraCalibrateWorld>

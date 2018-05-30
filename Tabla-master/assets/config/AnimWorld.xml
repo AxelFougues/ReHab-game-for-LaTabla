@@ -1,0 +1,49 @@
+<AnimWorld>
+
+	<!-- Vision -->
+		
+	<!-- cm -->
+	<Vision>
+
+		<CaptureAllPipelineStages>1</CaptureAllPipelineStages> <!-- So we can extract bitmaps -->
+
+		<Contours>
+			<ContourMinRadius>			1.5	</ContourMinRadius>
+			<ContourMinArea>			7	</ContourMinArea>
+			<ContourDPEpsilon>			5	</ContourDPEpsilon>
+			<ContourMinWidth>			3	</ContourMinWidth>
+		</Contours>
+
+	</Vision>
+
+	<RectFinder>
+
+<!--	What strategies to allow	-->
+		<AllowSubset>1</AllowSubset>
+		<AllowSuperset>1</AllowSuperset>
+
+<!--	Filters. (Last two should/could be identical to Vision/Contours)	-->
+		<InteriorAngleMaxDelta>5</InteriorAngleMaxDelta>
+		<MinRectWidth>3</MinRectWidth>
+		<MinRectArea>9</MinRectArea>
+		
+<!--	Tuning params	-->
+		<MaxGainAreaFrac>.2</MaxGainAreaFrac>
+		<SubsetRectMinPerimOverlapFrac>.8</SubsetRectMinPerimOverlapFrac>
+		<EdgeOverlapDistAttenuate>1</EdgeOverlapDistAttenuate>
+		
+	</RectFinder>
+	
+	
+	<DefaultTimeVec>-1 0</DefaultTimeVec>
+	<WorldUnitsToSeconds>85</WorldUnitsToSeconds>
+	<MaxFrameDist>20</MaxFrameDist>
+	<MaxScreenToFrameDist>50</MaxScreenToFrameDist>
+	<DebugDrawTopology>0</DebugDrawTopology>
+	<AnimLengthQuantizeToSec>.05</AnimLengthQuantizeToSec>
+	<EqualizeImages>0</EqualizeImages>
+	<BlankEdgePixels>2</BlankEdgePixels>
+	<FillCurrentFrame>1</FillCurrentFrame>
+
+	
+</AnimWorld>

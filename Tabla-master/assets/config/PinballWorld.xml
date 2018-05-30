@@ -1,0 +1,214 @@
+<PinballWorld>
+
+	<!-- Ball World Params -->
+	<!-- cm -->
+	<BallWorld>
+		<NumIntegrationSteps>		10 </NumIntegrationSteps>
+		<DefaultNumBalls>			0 </DefaultNumBalls>
+		<BallDefaultRadius>			1.5 </BallDefaultRadius>
+		<BallDefaultMaxRadius>		1.5 </BallDefaultMaxRadius>
+		<BallMaxVel>				2 </BallMaxVel>
+		<BallDefaultColor>			00FFFF </BallDefaultColor>
+		<BallDefaultRibbonColor>			DDFFFF </BallDefaultRibbonColor>
+
+		<BallContourImpactNormalVelImpulse>0</BallContourImpactNormalVelImpulse>
+		<BallContourCoeffOfRestitution>.7</BallContourCoeffOfRestitution>
+		<BallContourFrictionlessCoeff>1</BallContourFrictionlessCoeff>
+			<!-- We	might want to make this a property of each ball, or of each ball<->contour interaction -->
+
+		<Ribbon>
+			<Enabled>1</Enabled>
+			<MaxLength>50</MaxLength>
+			<SampleRate>1</SampleRate>
+			<RadiusScale>.4</RadiusScale>
+			<RadiusExp>.5</RadiusExp>
+			<AlphaScale>.5</AlphaScale>
+			<AlphaExp>.5</AlphaExp>
+		</Ribbon>
+				
+	</BallWorld>
+
+	<!-- cm -->
+	<Vision>
+		<Contours>
+<!--			<ThresholdStyle>OtsuInput</ThresholdStyle> -->
+<!--			<FixedThreshold>100</FixedThreshold>-->
+			<ContourMinRadius>			.5	</ContourMinRadius>
+			<ContourMinArea>			1	</ContourMinArea>
+			<ContourDPEpsilon>			1	</ContourDPEpsilon>
+			<ContourMinWidth>			.5	</ContourMinWidth>
+		</Contours>
+	</Vision>
+
+<!-- General -->
+	<SoundEnabled>1</SoundEnabled>
+	<DefaultUpVec>-1 0</DefaultUpVec>
+	<Gravity>.05</Gravity>
+	<BallReclaimAreaHeight>4</BallReclaimAreaHeight>
+
+	<FlipperScreenShake>.1</FlipperScreenShake>
+	<BallVelScreenShakeK>.5</BallVelScreenShakeK>
+	<MaxScreenShake>1</MaxScreenShake>
+
+<!-- Vision	-->
+	<PinballVision>
+		<PartMinContourRadius>1</PartMinContourRadius>
+		<PartMaxContourRadius>5</PartMaxContourRadius>
+		<PartMaxContourAspectRatio>2</PartMaxContourAspectRatio> <!-- 0 means no parts! 100+ means all parts; 2 is a reasonable #. -->
+		<HolePartMinContourRadius>.5</HolePartMinContourRadius>
+		<HolePartMaxContourRadius>2</HolePartMaxContourRadius>
+		<FlipperDistToEdge>4</FlipperDistToEdge>
+		
+		<PartTrackRadiusMaxDist>1</PartTrackRadiusMaxDist>
+		<PartTrackLocMaxDist>.25</PartTrackLocMaxDist>
+		
+		<DejitterContourMaxDist>1</DejitterContourMaxDist> <!-- 0 for off -->
+		<DejitterContourLerpFrac>.9</DejitterContourLerpFrac>
+
+		<EnableUI>1</EnableUI>
+		<UIMinAspectRatio>2</UIMinAspectRatio>
+		<UIMinSize>10 3</UIMinSize>
+	
+		<RectFinder>
+	<!--	For	finding ui components -->
+	
+	<!--	What strategies to allow	-->
+			<AllowSubset>1</AllowSubset>
+			<AllowSuperset>1</AllowSuperset>
+
+	<!--	Filters. (Last two should/could be identical to Vision/Contours)	-->
+			<ApproxPolyDP>3</ApproxPolyDP>
+			<InteriorAngleMaxDelta>5</InteriorAngleMaxDelta>
+			<MinRectWidth>3</MinRectWidth>
+			<MinRectArea>9</MinRectArea>
+			
+	<!--	Tuning params	-->
+			<MaxGainAreaFrac>.2</MaxGainAreaFrac>
+			<SubsetRectMinPerimOverlapFrac>.8</SubsetRectMinPerimOverlapFrac>
+			<EdgeOverlapDistAttenuate>1</EdgeOverlapDistAttenuate>
+		</RectFinder>
+		
+	</PinballVision>
+	
+	<Parts>
+		<BumperMinRadius>1</BumperMinRadius>
+		<BumperContourRadiusScale>2</BumperContourRadiusScale>
+		<BumperKickAccel>.5</BumperKickAccel>
+
+		<BumperOuterColor>FF0000</BumperOuterColor>
+		<BumperInnerColor>FFCC00</BumperInnerColor>
+		<BumperOnColor>00CCFF</BumperOnColor>
+		<BumperStrobeColor>FFCC22</BumperStrobeColor>
+		
+		<TargetRadius>1.5</TargetRadius>
+		<TargetMinWallDist>1</TargetMinWallDist>
+		<TargetDynamicRadius>1</TargetDynamicRadius>
+
+		<TargetOnColor>22FF55</TargetOnColor>
+		<TargetOnStrobeColor>00FFFF</TargetOnStrobeColor>
+
+		<TargetOffColor>0055CC</TargetOffColor>
+		<TargetOffStrobeColor>FF00FF</TargetOffStrobeColor>
+		
+		<FlipperMinLength>1</FlipperMinLength>
+		<FlipperMaxLength>10</FlipperMaxLength>
+		<FlipperRadiusToLengthScale>6</FlipperRadiusToLengthScale>
+		<FlipperColor>00FFFF</FlipperColor>
+	</Parts>
+	
+	
+<!-- Graphics -->
+	<View>
+
+		<!-- Object Geometry -->
+		<CircleMinVerts>8</CircleMinVerts>
+		<CircleMaxVerts>100</CircleMaxVerts>
+		<CircleVertsPerPerimCm>.5</CircleVertsPerPerimCm>
+
+		<3d>
+			<Enable>1</Enable>
+			<BackfaceCull>0</BackfaceCull>
+			<TableDepth>3</TableDepth>
+			<ZSkew>.5</ZSkew>			
+		</3d>
+
+		<CubeMap>
+			<Size>32</Size>
+			<MaxCount>4</MaxCount>
+			<FrameSkip>2</FrameSkip>
+
+			<DrawFloor>1</DrawFloor>
+			<DrawBalls>1</DrawBalls>
+			<DrawRibbons>0</DrawRibbons>
+			<MipMap>1</MipMap>
+			<EyeHeight>50</EyeHeight>
+			<LightHeight>200</LightHeight>
+
+			<!--	.8,1.,.7	Specular color. TODO; Put ambient in here, name them properly. -->
+			<LightColor>DDFFEE</LightColor>			
+			
+			<FirstBustedKludge>0</FirstBustedKludge>
+			
+		</CubeMap>
+
+<!--		<SkyPipelineStageName>input</SkyPipelineStageName>-->
+		<SkyHeight>7</SkyHeight>
+		<SkyScale>.8</SkyScale>
+<!--	How far in -Z from table top does sky draw for balls... -->
+
+		<!-- Debug -->
+		<DebugDrawAdjSpaceRays>0</DebugDrawAdjSpaceRays>
+		<DebugDrawGeneratedContours>0</DebugDrawGeneratedContours>
+		<DebugDrawFlipperAccelHairs>0</DebugDrawFlipperAccelHairs>
+		<DebugDrawCubeMaps>0</DebugDrawCubeMaps>
+
+	</View>
+	
+	<Input>
+	<!-- Controls	-->
+	<!-- TODO... Note manufacturer/model and support multiple profiles; this is for PS4 -->
+	<!-- name="" is a placeholder until I parse it and use it -->
+	
+		<GamepadVerboseAxes>0</GamepadVerboseAxes>
+	
+		<Gamepad name="DS4">
+			<button id="0" name="Square" do=""/>
+			<button id="1" name="X" do=""/>
+			<button id="2" name="O" do=""/>
+			<button id="3" name="Triangle" do=""/>
+
+			<button id="4" name="L1" do="flippers-left"/>
+			<button id="6" name="L2" do="flippers-left"/>
+			<button id="5" name="R1" do="flippers-right"/>
+			<button id="7" name="R2" do="flippers-right"/>
+			
+			<button id="8" name="Share"   do="serve-multiball"/>
+			<button id="9" name="Options" do="pause-ball-world"/>
+			
+			<button id="10" name="L" do=""/>
+			<button id="11" name="R" do=""/>
+			
+			<button id="13" name="Touch" do=""/>
+
+			<axis id="0" name="Lx" do=""/>
+			<axis id="1" name="Ly" do="plunger"/>
+			<axis id="2" name="Rx" do=""/>
+			<axis id="3" name="Ry" do="plunger"/>
+			<axis id="4" name="Dx" do=""/>
+			<axis id="5" name="Dy" do=""/>
+
+			<axis id="19" name="TiltX" do=""/>
+		</Gamepad>
+
+		<Keys>
+			<key char="b" do="serve-multiball"/>			
+			<key char="." do="pause-ball-world"/>
+			<key char="n" do="flippers-left"/>
+			<key char="l" do="flippers-left"/>
+			<key char="m" do="flippers-right"/>
+			<key char="r" do="flippers-right"/>
+			<key char=" " do="plunger"/>			
+		</Keys>
+	</Input>
+	
+</PinballWorld>

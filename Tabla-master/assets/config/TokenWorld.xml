@@ -1,0 +1,41 @@
+<TokenWorld>
+	
+	
+
+	<!-- cm -->
+	<Vision>
+		<CaptureAllPipelineStages>1</CaptureAllPipelineStages> <!-- So we can extract bitmaps -->
+
+		<Contours>
+			<ContourMinRadius>			.5	</ContourMinRadius>
+			<ContourMinArea>			7	</ContourMinArea>
+			<ContourDPEpsilon>			1	</ContourDPEpsilon>
+			<ContourMinWidth>			3	</ContourMinWidth>
+		</Contours>
+		
+		<TokenMatcher>
+			<Verbose>1</Verbose>
+			<InlierThreshold>			1.5   </InlierThreshold>
+			<NNMatchRatio>			    0.8   </NNMatchRatio>
+			<NNMatchPercentage>			0.3   </NNMatchPercentage>
+			<MinMatchScore>				10    </MinMatchScore>
+			<TokenContourMinWidth>		10    </TokenContourMinWidth>
+			<TokenContourMaxWidth>		40    </TokenContourMaxWidth>
+			<TokenContourMinAspect>		0.7   </TokenContourMinAspect>
+			
+			<Tokens path="music-icons-black/">
+				<Token name="Cloud" path="additive.png"/>
+				<Token name="FMSynth" path="board.png"/>
+				<Token name="DrumSampler" path="drumkit.png"/>
+				<Token name="Keys" path="keyboard.png"/>
+				<Token name="Bass" path="keyboard2.png"/>
+				<Token name="Pokie" path="robit-pokie.png"/>
+				<Token name="Scale" path="scale.png"/>
+				<Token name="Tempo" path="tempo.png"/>
+				<Token name="Transpose" path="transpose.png"/>
+			</Tokens>
+		</TokenMatcher>
+	</Vision>
+
+	<DrawKeypoints>0</DrawKeypoints>
+</TokenWorld>

@@ -1,0 +1,35 @@
+<BallWorld>
+	<!-- cm -->
+	<NumIntegrationSteps>	1 </NumIntegrationSteps>
+	<BallDensity>			.2 </BallDensity>
+	<BallDefaultRadius>			.5 </BallDefaultRadius>
+	<BallDefaultMaxRadius>		2 </BallDefaultMaxRadius>
+	<BallMaxVel>				.2 </BallMaxVel>
+	<BallDefaultColor>			C62D41 </BallDefaultColor>
+	<BallContourImpactNormalVelImpulse>.1</BallContourImpactNormalVelImpulse>
+	<BallContourCoeffOfRestitution>1</BallContourCoeffOfRestitution>
+	<BallContourFrictionlessCoeff>1</BallContourFrictionlessCoeff>
+
+	<Ribbon>
+		<Enabled>0</Enabled>
+		<MaxLength>50</MaxLength>
+		<SampleRate>1</SampleRate>
+		<RadiusScale>.9</RadiusScale>
+		<RadiusExp>.5</RadiusExp>
+		<AlphaScale>.5</AlphaScale>
+		<AlphaExp>.5</AlphaExp>
+	</Ribbon>
+
+
+	<!-- cm -->
+	<Vision>
+		<Contours>
+			<ContourGetExactMinCircle>	0	</ContourGetExactMinCircle>
+			<ContourMinRadius>			.5	</ContourMinRadius>
+			<ContourMinArea>			1	</ContourMinArea>
+			<ContourDPEpsilon>			1	</ContourDPEpsilon>
+			<ContourMinWidth>			.1	</ContourMinWidth>
+		</Contours>
+	</Vision>
+
+</BallWorld>

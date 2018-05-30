@@ -1,0 +1,249 @@
+MusicWorld ideas
+	vertical displacement of score is pitch/instrument (could have distinct registers for tones, then switch pitch inside of that register)
+	ratio of score size (very wide vs. square) is the length.
+	arbitrary polygons... just a litle more complex math
+	persist scores...
+		if things are stable, then rescan/update
+		maybe just keep them around via partial match if we can locate some fraction of the points of the score on the table.
+
+Vi, Emily playtest
+	More colors of paper
+	More colors of ball per behavior
+	Some agent/wall-following behavior. A roomba?
+	Things that explode when they hit the wall. (Goetz)
+	Colors of ball stay on same colors of paper. (We have colored paper)
+	Balls are infinitely more fun than Pong game.
+	No contour lines.
+	Balls collide and change colors
+	Smashed together and balls merge;
+	(me) balls split apart when 'frustrated'
+	Googley eyes projected onto paper
+
+
+More Game Worlds
+- Pong
+	- Synch start state: touch here to start (p1 + p2) (at side of field)
+	- 321 start
+	- Synch state at game end? touch center to burst that button and start?
+	- Sound effects
+	- Make ball get faster as volleys increase; or random start speed?
+	- Pause:
+		- Hand over camera?
+		- Take paddles off the table.
+		- One paddle on each side of table.
+
+- Support
+	√ Allow ball simulation in empty space (space between paddles) (Pong)
+		- Flag certain balls as doing inverse contour geometry.
+	- Multiple Game Worlds can be toggled between.
+		- Set of them
+		- Use keyboard to switch between them.
+		- Config UI allows you to see which one you are in/click on them.
+	- Put Vision settings in their own object; put xml in each GameWorld, pass it to Vision system.
+		- We will still want some generic system settings, too. A little dicey.
+			Maybe start with overloading or something? Or try not to do this at all.
+	- Allow game sim to insert their own geometry into reusable physics sim (breakout bricks) (Breakout)
+		- Component architecture of some sort.
+		- Allow contours to have user names (strings) and/or ids (ints)... lambdas?
+		- Allow merge of two contour sets (user and system) into a joined set used for simulation.
+			(sim could either generate a new list every frame, maybe with lambdas attached, or keep a persistent list. whatever is easiest to code up.)
+	- Color token recognition (PCS)
+	- Interframe paper coherency (Garden City, Music Box)
+	- Game cartridge recognition.
+
+- Worlds
+
+	Basic
+	- Ball World
+		- Allow ball insertion (at least)/deletion without keyboard keys.
+			. Just do automatic ball insertion (say 10?).
+	- Pong
+		- Detect/place goals, configure and draw board layout.
+		- Score, Game state
+		- Show score, game state
+	- Breakout
+		- Merge detected and simulated geometry
+		- Game state (new, level complete, losing, etc...), scoring
+		- Board (brick) generation
+
+	Fancy (tokens)
+	- Pinball Construction Set
+	- Racing Cars
+
+	Mega-fancy (paper coherency)
+	- Garden City
+	- Music Box (more nuanced stroke detection/pixel parsing)
+
+Next
+- √ Finish my desk setup
+	- Short throw projector
+	- Black paper
+	- Calibrate
+- (meh) Manufacture a second one
+- Go back to toy prototyping...
+
+Pipeline viz
+• Must-have
+	√ Draw world inside of each pipeline stage view
+		- On a switch.
+	- √ Polygon editor for configuration
+		- Will probably require fixing a known UI mapping bug. (not really)
+		- √ Camera selection
+		- √ Projector world coordinates
+		- √ World units/measurement.
+		- √ Save/Load user LightLink settings.
+	- √ Hide when in projector full-screen mode
+		√ (Or put in secondary UI window)
+• Maybe
+	- Different view for full screen version? Or maybe we're covered already.
+	- Clip drawing in each stage to the bounding rectangle.
+• Nice
+	- Put name of each stage in text
+	- Scale to fill available vertical space.
+		- And/Or: (Put gutter and horizontal scaling amount in xml)
+	- √ Put pipeline stage view caching logic on an xml switch
+		- Time the performance impact of this.
+		- Allow each stage to store its content in its own native format.
+	- Mouse click to select stage to view large
+
+Camera transform
+√ Need to perspective transform image without losing pixels
+√ Decouple world coordinates from pixel coordinates
+	- Add more metadata to pipeline
+		- every stage has world coordinates, by default set to image (if first), or prior stage
+		- so every stage except first will be the same, the world coordinates of clipped subregion
+		- first stage will be bigger than the table world. i think the mapping should be straightforward:
+			output_world_bound_rect_pts :mapped-through: clip_output_rect -> clip_input_rect
+			(or stuff will draw in it wrong)
+	- Draw output in world space
+		- Draw pipeline textures in world space
+			Ortho Transform is for pipeline image's world coordinates
+			Then draw the image in world coordinates
+		- Draw balls, contours in world space
+	- Transform contour output points to world space
+√ Draw UI text elements/etc in window space.
+	So a second pass while drawing in window coordinate space for current and future UI elements.
+
+
+√ Projector Transform
+- Load Projector coords (world space, pixel space)
+- Draw into that transform
+	- Add this to the pipeline, so we can toggle to it.
+		- Maybe add another world-space pipeline frame so we can see things rendered in the 70x70 world...
+			(so image space = world space)
+	- Try loading that transformation matrix directly, so we let opengl handle the perspective transform for us
+		- Backup: use an fbo, draw in world space pixels, then draw in framebuffer transformed (lame)
+- How to set those coords?
+	- First pass: eyeball it and enter something manually
+	- If we are rendering projector output (16:9, 1024 x 768 or whatever it is--which might need to be hard coded--OH NO--we can detect it on startup when we choose the full-screen device we will draw to) then
+		We will have an image space whose coordinates are in projector space.
+		SO: We can put up a UI in that pipeline stage, four points for us to manipulate.
+		Or even more simply, like before, mouse cursor will just show us the points and we can enter them.
+		EXCEPT we have no idea where they are, so a GUI will be nice.
+		Especially if we can fullscreen it and do it--and optically align it in the world/see the mouse cursor in the world.
+
+
+
+Basic
+√ XML parameter loading/saving
+	- Settings > Debug, etc..
+	- Screen/Camera >
+		- Which to use
+		- Mapping coordinates
+			- From where in camera frame?
+			- To where in projector frame?
+			- Scaling: In world units, what does this map to? (let's think in terms of inches or mm)
+		- Contour resolution thresholds
+	- Behaviors
+	- Implement as nested callbacks.
+		- getfile( path, getxmldatalambda() ) .. so does hot-loading, etc...
+		- getxmlsubtree( xml, path, xmlsubtreehandler() .. could then call this for parts of it
+- Better data visualization.
+	- Construct a pipeline, log images and data flow edges to it;
+		+ contour data, too
+		+ transformation functions
+			- with parameters
+		+ this could be output as text, automatically generated graph, or linked to a diagram
+			- the parameters could become live ui elements
+			- this could become an intermediate language for specifying pipelines, so read back in; turn the tables on it.
+
+Simulation
+- √ Better topology handling (boxes in boxes)
+- √ Balls have velocity
+- √ Proper ball-ball collisions
+- √ Ball masses/relative sizes matter.
+- √ Ball <> Ball collision position correction is now relative to masses.
+- High quality draw mode (for projector/main image) that draws more circle polygon facets.
+
+New features
+- Generalized calibration of camera and projector.
+	- Hard coded
+	- Dynamic auto-detect
+- Recognize colorful marker objects (lego bricks, eg)
+	- Let me remove keyboard controls
+- Sound effects
+	- Clacking balls; use ping-pong sounds from Dave.
+- Visual effects
+	√ Squash and stretch balls
+		- Normalize ball squashing effect? Just always shove in a normal vector, and have a tick counter... (and if multiple collisions, then average them, don't use biggest.)
+		√ Ball<>Ball collision squishing effect is relative to ball sizes/masses.
+	- Environment mapping on chrome balls
+- Paper velocity/transformation
+	- Use OCV Optical flow?
+	- Then apply force to balls on collision w paper edge
+	- Translate/rotate/transform balls
+- More out there:
+	- Lift paper/depth = height field they roll off of.
+	- Detect hand with kinect, put old vision image data under it so we effectively ignore the hand.
+		(Maybe don't even project there).
+
+Technical
+- Fix barrel transform
+- Draw circles with more polys
+- Decouple drawing from pipeline a bit
+	- Dont' be checking query stage all the time. Have one place where we pull values from
+	the pipeline and set our various matrices up. (I think.)
+- Pipeline is not just a trace;
+	- Vision code can pull parameters from it.
+	- These parameters can specify (in vision code or elsewhere, by name) UI and value ranges.
+- Refactoring
+	√ Ball <> contour simulation logic in its own independent class. (world simulation)
+		- This leaves room for another "simulation", the gray-code auto-registration that would calibrate registrations
+	- Camera-projector registration in its own class (simply the camera-projector-world mapping)
+		- Camera coordinates
+		- World coordinates
+		- Projector coordinates
+		- 1:1
+	√ OCV pipeline and outputs in its own class (image -> semantic actionable world data)
+	√ Shove stuff into xml (make all this stuff tunable)
+		- Ball World simulation parameters
+		- Vision pipeline settings
+		- Registration
+			- Camera/world/projector coordinates
+			- Which camera, which projector to use (we are assuming last right now, it seems OK.)
+		- Debug settings
+	√ Hot-load xml
+	- The App that holds and manages all this stuff
+		- Can swap between 'modes': calibration vs simulation
+		- Can save/load mappings, and undertake to create them
+		- Can show us debug visualizations
+- Better registration
+	- Automatic video-projector calibration (gray coding, or variant).
+	- Will let me swap out, improve physical gear.
+√ Lower latency
+	- Think we got this down: pick proper resolutions.
+		- Just need to parameterize this for different installs and easy experimentation.
+		- Also, maybe dip into OSX camera api and get the resolutions.
+	- new capture method?
+	- multi-threaded? (measure latencies first)
+- Use a Kinect.
+	- Probably lower latency
+	- Has IR for cleaner paper detection
+	- Depth for hand rejection
+	- Can do balls rolling off paper with z-height
+
+
+Bugs
+- XML loader will explode if file doesn't exist.
+- UI transform mapping on first pipeline stage is busted.
+- Poly editor for camera world area only works in camera view (because of feedback loop in other stages)

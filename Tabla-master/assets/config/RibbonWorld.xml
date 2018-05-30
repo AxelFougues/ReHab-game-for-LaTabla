@@ -1,0 +1,27 @@
+<RibbonWorld>
+
+	
+	<!-- cm -->
+	<Vision>
+		<Contours>
+<!--			<FixedThreshold>10</FixedThreshold>-->
+			<ThresholdStyle>Fixed</ThresholdStyle> 
+			<FixedThreshold>110</FixedThreshold>
+<!--	-1 it OTSU, otherwise 0..255 -->
+
+			<ContourGetExactMinCircle>	0	</ContourGetExactMinCircle>
+			<ContourMinRadius>			.5	</ContourMinRadius>
+			<ContourMinArea>			1	</ContourMinArea>
+			<ContourDPEpsilon>			1	</ContourDPEpsilon>
+			<ContourMinWidth>			1	</ContourMinWidth>
+		</Contours>
+	</Vision>
+
+	<MaxRibbons>10</MaxRibbons>
+	<MaxRibbonLength>50</MaxRibbonLength>
+<!--	Maximum allowed "hop" for a tracked object to gain new identity -->
+	<SnipDistance>10</SnipDistance>
+<!--	Distance until a new point is added on the ribbon-->
+	<PointDistance>0.1</PointDistance>
+	<WidthDivision>10</WidthDivision>
+</RibbonWorld>

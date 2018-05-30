@@ -1,0 +1,147 @@
+<PaperBounce3>
+
+	<!-- I guess the use of cm is arbitrary, and it could be inches or whatever, but you 
+	have to be consistent across all these parameters. -->
+
+	<App>
+	
+<!--	This could use a cleanup since we refactored into two windows	-->
+		<AutoFullScreenProjector>	1 </AutoFullScreenProjector>
+		<DrawCameraImage>			1 </DrawCameraImage>
+		<DrawContours>				0 </DrawContours>
+		<DrawContoursFilled>		0 </DrawContoursFilled>
+		<DrawMouseDebugInfo>		0 </DrawMouseDebugInfo>
+		<DrawContourMousePick>		0 </DrawContourMousePick>
+		<DrawPolyBoundingRect>		0 </DrawPolyBoundingRect>
+		<DrawContourTree>			0 </DrawContourTree>
+		<DrawPipeline>				0 </DrawPipeline>
+		
+		
+		<HasConfigWindow>1</HasConfigWindow>
+		<ConfigWindowMainImageMargin> 32 </ConfigWindowMainImageMargin>
+		<ConfigWindowPipelineGutter> 8 </ConfigWindowPipelineGutter>
+		<ConfigWindowPipelineWidth> 64 </ConfigWindowPipelineWidth>
+		<ConfigWindowMainImageDrawBkgndImage>	1 </ConfigWindowMainImageDrawBkgndImage>
+		
+		<KeyboardStringTimeout>.2</KeyboardStringTimeout>
+		
+		<DefaultPixelsPerWorldUnit>8</DefaultPixelsPerWorldUnit>
+		<DebugFrameSkip>2</DebugFrameSkip>
+		
+		<DefaultGameWorld>RehabWorld</DefaultGameWorld>
+	</App>
+
+	<RFID>
+	<!-- Expects RFID reader to be a USB keyboard that emits digits + a newline char -->
+		<tag id="17317668" do="cartridge/BallWorld"/>
+		<tag id="17308708" do="cartridge/PongWorld"/>
+		<tag id="17317412" do="cartridge/MusicWorld"/>
+		<tag id="17325860" do="cartridge/CameraCalibrateWorld"/>
+		<tag id="17326116" do="cartridge/PinballWorld"/>
+		<tag id="17322276" do="cartridge/AnimWorld"/>
+	</RFID>
+
+
+	<!-- Projector <> Camera <> World mapping
+			This just gives initial values for user configuration.
+			Configuration you do in app is saved and loaded from ~Documents/LaTabla/.
+		-->
+	
+	<!-- Defaults for our YCR-OAK office setup -->
+	<LightLink>
+		<CaptureProfile>ELP 1280 x 720</CaptureProfile>
+		<ProjectorProfile>Default</ProjectorProfile>
+
+		<Capture>
+
+			<Profile>
+				<Name>ELP 1920 x 1080 @ 30fps</Name>
+				<DeviceName>USB 2.0 Camera</DeviceName>
+				<FileName/>
+				<CaptureSize>1920 1080</CaptureSize>
+				<CaptureCoords>
+					<v>454.519348 195.581055</v>
+					<v>1382.8407 209.354385</v>
+					<v>1393.8595 703.988586</v>
+					<v>442.123322 706.743164</v>
+				</CaptureCoords>
+				<CaptureWorldSpaceCoords>
+					<v>0 0</v>
+					<v>126 0</v>
+					<v>126 69</v>
+					<v>0 69</v>
+				</CaptureWorldSpaceCoords>
+				<DistCoeffs>[-0.35962537, -0.80946761, 0.067833617, 0.0047525521, 1.4724478]</DistCoeffs>
+				<CameraMatrix>[1631.1213, 0, 857.31335;  0, 1561.5, 297.23669;  0, 0, 1]</CameraMatrix>
+			</Profile>
+			
+			<Profile>
+				<Name>ELP 1280 x 720 @ 60fps</Name>
+				<DeviceName>USB 2.0 Camera</DeviceName>
+				<FileName/>
+				<CaptureSize>1280 720</CaptureSize>
+				<CaptureCoords>
+					<v>162.757828 63.472496</v>
+					<v>1185.81116 103.380928</v>
+					<v>1260.2915 670.642029</v>
+					<v>100.930344 647.574097</v>
+				</CaptureCoords>
+				<CaptureWorldSpaceCoords>
+					<v>0 0</v>
+					<v>126 0</v>
+					<v>126 69.5</v>
+					<v>0 69.5</v>
+				</CaptureWorldSpaceCoords>
+				<DistCoeffs>[-0.64873862, 0.16279763, 0.020434588, -0.026295083, 0.87134349]</DistCoeffs>
+				<CameraMatrix>[1606.7295, 0, 656.4892;  0, 1627.5187, 339.53409;  0, 0, 1]</CameraMatrix>
+			</Profile>
+
+			<Profile>
+				<Name>ELP 640 x 480 @ 60fps</Name>
+				<DeviceName>USB 2.0 Camera</DeviceName>
+				<FileName/>
+				<CaptureSize>640 480</CaptureSize>
+				<CaptureCoords>
+					<v>5.06933975 6.20670891</v>
+					<v>599.746338 6.75599194</v>
+					<v>631.386475 316.545441</v>
+					<v>8.39622116 361.42981</v>
+				</CaptureCoords>
+				<CaptureWorldSpaceCoords>
+					<v>0 0</v>
+					<v>126 0</v>
+					<v>126 69.5</v>
+					<v>0 69.5</v>
+				</CaptureWorldSpaceCoords>
+<!--	I hand noodled this matrix, so it's not great.	-->
+				<DistCoeffs>[-1.05, -4.1999998, 0.0079270257, -0.0037597809, 30.936378]</DistCoeffs>
+				<CameraMatrix>[1072.3177, 0, 314.25284;  0, 1062.8184, 234.11261;  0, 0, 1]</CameraMatrix>
+			</Profile>
+
+			
+		</Capture>
+
+
+		<Projector>
+			<Profile>
+				<Name>Default</Name>
+				<ProjectorSize>1280 800</ProjectorSize>
+
+				<ProjectorCoords>182.892456 210.350327
+				1045.86682 250.694092
+				1108.09595 767.35968
+				184.268646 755.159668
+				</ProjectorCoords>
+				
+				<ProjectorWorldSpaceCoords>0 0
+				121.463959 -0.303260803
+				130.19603 75.1454391
+				-0.606506348 73.5489044
+				</ProjectorWorldSpaceCoords>
+				
+			</Profile>
+		</Projector>
+
+	</LightLink>
+
+</PaperBounce3>
