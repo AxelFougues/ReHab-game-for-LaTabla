@@ -7,26 +7,26 @@
 
 #include "Animal.hpp"
 
-void Animal::reproduce(int pos, int harvesters){
+void Animal::reproduce(int pos, int neighborsHarvested){
     if(settled){
         kids = 0;
         switch (pos) {
             case 0:
-                if(harvesters <= 1)
+                if(neighborsHarvested <= 1)
                     kids = 2;
-                if(harvesters <= 4)
+                if(neighborsHarvested <= 4)
                     kids = 1;
                 break;
             case 1:
-                if(harvesters == 0)
+                if(neighborsHarvested == 0)
                     kids = 2;
-                if(harvesters <= 2)
+                if(neighborsHarvested <= 2)
                     kids = 1;
                 break;
             case 2:
-                if(harvesters == 0)
+                if(neighborsHarvested == 0)
                     kids = 2;
-                if(harvesters == 1)
+                if(neighborsHarvested == 1)
                     kids = 1;
                 break;
         }
@@ -41,6 +41,7 @@ void Animal::settle(int b){
 
 void Animal::unSettle(){
     settled = false;
+    kids = 0;
     
 }
 

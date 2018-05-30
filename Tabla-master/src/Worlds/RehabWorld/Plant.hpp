@@ -17,11 +17,23 @@ class Plant{
 public:
     
     Plant(){
+        
         biomass = rand() % (maxBiomass + 1);
     }
-    
+    /*!
+     * @discussion Gets biomass.
+     * @return biomass the biomass amount.
+     */
     int getBiomass(){return biomass;}
-    void renewBiomass(int harvesters);
+    /*!
+     * @discussion Renews the biomass.
+     */
+    void renewBiomass();
+    /*!
+     * @discussion Deprecated but still updates noHarvestPeriod.
+     * @param harvesters count of tokens on the cell.
+     */
+    void harvest(int harvesters);
     
 private:
     

@@ -69,18 +69,87 @@ using namespace std;
 class RehabWorld : public GameWorld{
 public:
     
-    enum States{initial, arrival, naturalistInput, harvestersInput, harvest, results};
-    int round = 0, accessCount = 0;
+    enum States{initial, arrival, naturalistInput, harvestersInput, harvest, results, renew, end};
+   
+    int accessCount = 0, timer = 0;
     States state = initial;
     float gridWidth, gridHeight;
-    RehabGame board;
+    RehabGame *board;
     bool keyboardValidation = false;
-    void drawGrid(ColorA c);
+    
+    /*!
+     * @discussion Draws grid lines in chosen color.
+     * @param c color used for drawing.
+     * @param scale multiplicateur de taille.
+     */
+    void drawGrid(ColorA c, float scale);
+    /*!
+     * @discussion Initialises grid dimensions according to world size.
+     */
     void computeGrid();
-    void drawFillGrid(ColorA c, bool birds, bool access);
+    /*!
+     * @discussion Draws grid squares according to each cell's biomass.
+     * @param c color used to represent biomass.
+     * @param access display or not red rectangles on protected zones.
+     * @param scale multiplicateur de taille.
+     */
+    void drawFillGrid(ColorA c,bool access, float scale);
+    /*!
+     * @discussion Draws birds as white dots in the middle of the cells.
+     * @param c color used for drawing.
+     */
+    void drawBirds(ColorA c);
+    /*!
+     * @discussion Called at mouse click to set access of cells
+     * @param loc Click location
+     */
     void naturalistClick(vec2 loc);
+    /*!
+     * @discussion Translates world coordinates to cell indexes.
+     * @param coords coordinates to translate.
+     * @return translated coordinates.
+     */
     vec2 coordsToGrid(vec2 coords);
+    /*!
+     * Checks if all necessary tokens are placed.
+     */
+    bool checkTokenValidity();
+    /*!
+     * @discussion Saves the tokens in the board for the next steps.
+     * @param tokens the list of all validated tokens.
+     */
     void registerHarvesterTokens(list<Contour> tokens);
+    /*!
+     * @discussion Token detection.
+     */
+    void findTokens();
+    /*!
+     * @discussion Sets token and player relationship.
+     * @param tokens of corresponding type to player.
+     * @param player index of player.
+     */
+    void distributeTokens(list<Contour> tokens, int player);
+    /*!
+     * @discussion Draws token contours.
+     * @param c drawing color.
+     */
+    void drawTokens(Color color);
+    /*!
+     * @discussion Draws individual token score as a number on the token.
+     * @param c drawing color.
+     */
+    void drawTokenScore(ColorA c);
+    /*!
+     * @discussion Draws all information of the end screen.
+     */
+    void drawEndScreen();
+    
+    
+    //tokens collections used to store detected tokens according to type.
+    list<Contour> type1Token; //square
+    list<Contour> type2Token; //triangle
+    list<Contour> type3Token; //toBeDetermined
+    list<Contour> type4Token; //toBeDetermined
     
     //Universal
     void initialize();
@@ -205,7 +274,7 @@ private:
     
 #ifdef isUsingContours
     int CONTOUR_THRESHOLD = 20;
-    int MAX_AREA_THRESHOLD = 2000;
+    int MAX_AREA_THRESHOLD = 4000;
     list<Contour> cubeInputs;
     
     /*!

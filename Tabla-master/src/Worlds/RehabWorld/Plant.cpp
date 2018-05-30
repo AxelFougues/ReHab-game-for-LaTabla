@@ -21,19 +21,20 @@ void Plant::increaseBiomassBy(int x){
         biomass = maxBiomass;
 }
 
-void Plant::renewBiomass(int harvesters){
-    if(harvesters > 1){
-        decreaseBiomassBy(harvesters);
-    }else if (harvesters == 0){
-        if(noHarvestPeriod == 0){
-            increaseBiomassBy(1);
-        }else{
-            if(noHarvestPeriod > 1)
-                decreaseBiomassBy(1);
-        }
+void Plant::renewBiomass(){
+    if(noHarvestPeriod == 0)
+        increaseBiomassBy(1);
+    else{
+        if(noHarvestPeriod > 1)
+            decreaseBiomassBy(1);
     }
-    
-    updateNoHarvestPeriod(harvesters>0);
+    updateNoHarvestPeriod(false);
+}
+
+void Plant::harvest(int harvesters){
+    if(harvesters > 1)
+        //decreaseBiomassBy(harvesters);
+    updateNoHarvestPeriod(true);
 }
 
 void Plant::updateNoHarvestPeriod(bool harvested){
